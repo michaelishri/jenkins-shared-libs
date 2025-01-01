@@ -2,6 +2,7 @@ package machine.command
 
 class DiskUsage implements Serializable {
     private final def steps
+    private command = 'df -a'
 
     DiskUsage(steps) {
         this.steps = steps
@@ -20,8 +21,8 @@ class DiskUsage implements Serializable {
     }
 
     public parse() {
-        def output = command()
-        return output
+        def raw = command()
+        return raw
     }
 
 
