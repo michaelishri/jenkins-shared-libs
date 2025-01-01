@@ -19,7 +19,7 @@ class DiskUsage implements Serializable {
             // this.hostname = hostname
         // }
 
-        return hostname
+        return this.hostname
     }
 
     String getDateTime() {
