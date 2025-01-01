@@ -16,7 +16,7 @@ class DiskUsage implements Serializable {
     String getHostname() {
         // if(this.hostname.isEmpty()) {
             hostname = executeCommand('cat /etc/hostname')
-            // this.hostname = hostname
+            this.computername = hostname
         // }
 
         return this.computername
