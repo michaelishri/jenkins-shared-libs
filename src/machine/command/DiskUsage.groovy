@@ -23,7 +23,7 @@ class DiskUsage implements Serializable {
         return parse().toJson()
     }
 
-    String parse() {
+    def parse() {
         def raw = executeCommand(command)
         def lines = raw.split('\n')
         def headers = lines[0].split(/\s+/) // Extract the headers from the first line
