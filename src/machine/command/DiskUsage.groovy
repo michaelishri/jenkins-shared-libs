@@ -14,11 +14,11 @@ class DiskUsage implements Serializable {
     }
 
     String getHostname() {
-        if(this.hostname == null) {
-            this.hostname = executeCommand('cat /etc/hostname')
+        if(hostname == null) {
+            hostname = executeCommand('cat /etc/hostname')
         }
 
-        return this.hostname
+        return hostname
     }
 
     String getDateTime() {
