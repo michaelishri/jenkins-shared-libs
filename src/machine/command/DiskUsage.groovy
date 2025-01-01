@@ -19,8 +19,8 @@ class DiskUsage implements Serializable {
         return executeCommand('date +"%Y-%m-%dT%H:%M:%S"')
     }
 
-    def get() {
-        def ingest = [
+    LinkedHashMap get() {
+        return [
             class: this.classification,
             execution: [
                 command: this.command,
@@ -29,8 +29,6 @@ class DiskUsage implements Serializable {
             ],
             data: parse()
         ]
-
-        return ingest
     }
 
     private String parse() {
@@ -47,30 +45,18 @@ class DiskUsage implements Serializable {
         return result
     }
 
-    def toJson(boolean pretty = false) {
-        if(pretty) {
-            return JsonOutput.prettyPrint(JsonOutput.toJson(get()))    
-        }
-
-        return JsonOutput.toJson(get())
-    }
-
-
-    String executeCommand(String command) {
+    private String executeCommand(String command) {
         return steps.sh(
             script: command,
             returnStdout: true
         ).trim()
     }
 
-    String executeAndParse(String command) {
-        // Use the sh step via the steps object
-        def output = steps.sh(
-            script: command,
-            returnStdout: true
-        ).trim()
-        
-        // Add your parsing logic here
-        return output
+    String toJson(boolean pretty = false) {
+        if(pretty) {
+            return JsonOutput.prettyPrint(JsonOutput.toJson(get()))    
+        }
+
+        return JsonOutput.toJson(get())
     }
 }
