@@ -19,7 +19,7 @@ class DiskUsage implements Serializable {
         return executeCommand('date +"%Y-%m-%dT%H:%M:%S"')
     }
 
-    String get() {
+    def get() {
         def ingest = [
             class: this.classification,
             execution: [
@@ -30,7 +30,9 @@ class DiskUsage implements Serializable {
             data: parse()
         ]
 
-        return toJson(ingest)
+        return ingest
+
+        // return toJson(ingest)
     }
 
     def String parse() {
