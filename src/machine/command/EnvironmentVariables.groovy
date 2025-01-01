@@ -2,7 +2,7 @@ package machine.command
 
 import groovy.json.JsonOutput
 // import java.text.SimpleDateFormat
-import machine.command.getDateTime
+import machine.command.DateTime
 
 class EnvironmentVariables implements Serializable, getDateTime {
     private final def steps
