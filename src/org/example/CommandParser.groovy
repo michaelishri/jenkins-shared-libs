@@ -1,5 +1,7 @@
 package org.example
 
+import groovy.transform.Field
+
 @groovy.transform.Field
 class CommandParser implements Serializable {
     private final def steps
