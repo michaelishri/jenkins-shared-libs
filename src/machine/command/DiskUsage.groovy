@@ -15,7 +15,7 @@ class DiskUsage implements Serializable {
 
     String getHostname() {
         if(hostname == null) {
-            hostname = executeCommand('cat /etc/hostname')
+            hostname = java.net.InetAddress.getLocalHost().getHostName()
         }
 
         return hostname
