@@ -35,7 +35,7 @@ class DiskUsage implements Serializable {
         }
 
         // this.data = result
-        return JsonOutput.prettyPrint((JsonOutput.toJson(result))
+        return JsonOutput.prettyPrint(JsonOutput.toJson(result))
     }
 
 
