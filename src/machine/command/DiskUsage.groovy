@@ -15,6 +15,16 @@ class DiskUsage implements Serializable {
         return executeCommand('date +"%Y-%m-%dT%H:%M:%S"')
     }
 
+    String command() {
+        return executeCommand('df -a')
+    }
+
+    public parse() {
+        def output = command()
+        return output
+    }
+
+
     String executeCommand(String command) {
         return steps.sh(
             script: command,
