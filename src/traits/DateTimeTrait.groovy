@@ -3,7 +3,7 @@ package traits
 trait DateTimeTrait {
     public String datetime
 
-    def getDateTime() {
-        return ""
+    void getDateTime() {
+        echo 'Getting date time.'
     }
 }
