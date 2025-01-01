@@ -5,7 +5,7 @@ import groovy.json.JsonOutput
 // import DateTime
 import traits.DateTime
 
-class EnvironmentVariables implements Serializable, DateTime {
+class EnvironmentVariables implements Serializable, DateTimeTrait {
     private final def steps
     private String command = 'printenv | sort'
     private String classification = 'machine.command.printenv'
