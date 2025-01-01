@@ -14,7 +14,7 @@ class DiskUsage implements Serializable {
     }
 
     String getHostname() {
-        if(this.computername.isEmpty()) {
+        if(this.computername == null || this.computername.isEmpty()) {
             // def hostname = executeCommand('cat /etc/hostname')
             this.computername = executeCommand('cat /etc/hostname')
         }
