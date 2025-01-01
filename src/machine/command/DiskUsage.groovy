@@ -5,16 +5,20 @@ import java.text.SimpleDateFormat
 
 class DiskUsage implements Serializable {
     private final def steps
-    private command = 'df -a'
-    private classification = 'machine.command.df'
+    private String command = 'df -a'
+    private String classification = 'machine.command.df'
+    private String hostname
 
     DiskUsage(steps) {
         this.steps = steps
     }
 
     String getHostname() {
-        // return executeCommand('cat /etc/hostname')
-        return System.getenv('JOB_NAME');
+        if(!this.hostname) {
+            this.hostname = executeCommand('cat /etc/hostname')
+        }
+        
+        return this.hostname
     }
 
     String getDateTime() {
