@@ -1,6 +1,6 @@
 package traits
 
-trait DateTimeTrait implements Serializable {
+trait DateTime implements Serializable {
     @NonCPS
     String getDateTime() {
         return new Date().toString()
