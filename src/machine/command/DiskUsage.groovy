@@ -12,10 +12,7 @@ class DiskUsage implements Serializable {
     }
 
     String getDateTime() {
-        return steps.sh(
-            script: 'date +"%Y-%m-%dT%H:%M:%S"',
-            returnStdout: true
-        ).trim()
+        return executeCommand('date +"%Y-%m-%dT%H:%M:%S"')
     }
 
     String executeCommand(String command) {
