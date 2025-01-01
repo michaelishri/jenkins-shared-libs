@@ -47,8 +47,12 @@ class DiskUsage implements Serializable {
         return result
     }
 
-    def toJson() {
-        return JsonOutput.prettyPrint(JsonOutput.toJson(get()))
+    def toJson(boolean pretty = false) {
+        if(pretty) {
+            return JsonOutput.prettyPrint(JsonOutput.toJson(get()))    
+        }
+        
+        return JsonOutput.toJson(get())
     }
 
 
