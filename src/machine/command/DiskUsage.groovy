@@ -16,12 +16,8 @@ class DiskUsage implements Serializable {
         return executeCommand('date +"%Y-%m-%dT%H:%M:%S"')
     }
 
-    String command() {
-        return executeCommand(command)
-    }
-
     public parse() {
-        def raw = command()
+        def raw = executeCommand(command)
         return raw
     }
 
