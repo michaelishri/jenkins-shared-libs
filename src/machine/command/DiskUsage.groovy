@@ -21,7 +21,7 @@ class DiskUsage implements Serializable {
         return hostname
     }
 
-    def setHostname(String computername) {
+    public setHostname(String computername) {
         hostname = computername
     }
 
