@@ -39,22 +39,48 @@ class LinuxDistro implements Serializable {
                 hostname: this.getHostname(),
                 time: this.getDateTime()
             ],
-            // data: parse()
+            data: parse()
         ]
     }
 
-    private String parse() {
-        // def raw = executeCommand(command)
-        // def lines = raw.split('\n')
-        // def headers = lines[0].split(/\s+/) // Extract the headers from the first line
-        // def dataLines = lines[1..-1] // Extract the rest of the lines (the data)
+    public String parse(String os_release = "") {
+        if(os_release.isEmpty()) {
+            def raw = executeCommand(command).trim()
+        }
         
-        // def result = dataLines.collect { line ->
-        //     def values = line.split(/\s+/)
-        //     [headers, values].transpose().collectEntries() // Map headers to values
-        // }
+        def osReleaseMap = [:]
+        def lines = raw.split('\n')
 
-        // return result
+        lines.each{ line ->
+            // Skip comments
+            if(line && !line.startsWith('#')) {
+                // Split on first equals sign
+                def parts = line.split('=', 2)
+                if (parts.size() == 2) {
+                    def key = parts[0].trim()
+                    def value = parts[1].trim()
+                    
+                    // Remove surrounding quotes if present
+                    if ((value.startsWith('"') && value.endsWith('"')) ||
+                        (value.startsWith("'") && value.endsWith("'"))) {
+                        value = value[1..-2]
+                    }
+                    
+                    // Convert common boolean strings
+                    if (value.toLowerCase() in ['true', 'false']) {
+                        value = value.toBoolean()
+                    }
+                    // Try to convert to number if possible
+                    else if (value.isNumber()) {
+                        value = value.toBigDecimal()
+                    }
+                    
+                    osReleaseMap[key] = value
+                }
+            }
+        }
+
+        return osReleaseMap
     }
 
     private String executeCommand(String command) {
