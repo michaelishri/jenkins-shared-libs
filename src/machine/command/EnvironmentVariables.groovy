@@ -1,10 +1,10 @@
 package machine.command
 
 import groovy.json.JsonOutput
-// import java.text.SimpleDateFormat
-import machine.command.DateTime
+import java.text.SimpleDateFormat
+import traits.DateTime
 
-class EnvironmentVariables implements Serializable, GetDateTime {
+class EnvironmentVariables implements Serializable, DateTime {
     private final def steps
     private String command = 'printenv | sort'
     private String classification = 'machine.command.printenv'
@@ -38,7 +38,7 @@ class EnvironmentVariables implements Serializable, GetDateTime {
             execution: [
                 command: this.command,
                 hostname: this.getHostname(),
-                time: GetDateTime()
+                time: this.getDateTime()
             ],
             data: parse()
         ]
