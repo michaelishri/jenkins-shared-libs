@@ -7,7 +7,7 @@ class DiskUsage implements Serializable {
     private final def steps
     private String command = 'df -a'
     private String classification = 'machine.command.df'
-    private String hostname
+    private String computername
 
     DiskUsage(steps) {
         this.steps = steps
@@ -19,7 +19,7 @@ class DiskUsage implements Serializable {
             // this.hostname = hostname
         // }
 
-        return this.hostname
+        return this.computername
     }
 
     String getDateTime() {
