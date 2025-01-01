@@ -18,7 +18,7 @@ class DiskUsage implements Serializable {
 
     String getDateTime() {
         def date = new Date()
-        def dateTime = new SimpleDateFormat("yyyy-MM-ddTHH:mm:ss")
+        def dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         return dateTime.format(date)
     }
 
