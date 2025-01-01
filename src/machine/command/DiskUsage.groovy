@@ -5,6 +5,7 @@ import groovy.json.JsonOutput
 class DiskUsage implements Serializable {
     private final def steps
     private command = 'df -a'
+    private classification = 'machine.command.df'
 
     DiskUsage(steps) {
         this.steps = steps
@@ -19,7 +20,17 @@ class DiskUsage implements Serializable {
     }
 
     String get() {
-        return parse()
+        def ingest = [
+            class: this.classification,
+            execution: [
+                command: this.command,
+                hostname: this.getHostname(),
+                time: this.getDateTime()
+            ],
+            data: parse()
+        ]
+
+        return toJson(ingest)
     }
 
     def String parse() {
@@ -33,7 +44,11 @@ class DiskUsage implements Serializable {
             [headers, values].transpose().collectEntries() // Map headers to values
         }
 
-        return JsonOutput.prettyPrint(JsonOutput.toJson(result))
+        return result
+    }
+
+    def toJson(ArrayList data) {
+        return JsonOutput.prettyPrint(JsonOutput.toJson(data))
     }
 
 
