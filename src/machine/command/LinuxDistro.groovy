@@ -43,10 +43,8 @@ class LinuxDistro implements Serializable {
         ]
     }
 
-    public String parse(String os_release = "") {
-        if(os_release.isEmpty()) {
-            def raw = executeCommand(command).trim()
-        }
+    private parse() {
+        def raw = executeCommand(command).trim()
         
         def osReleaseMap = [:]
         def lines = raw.split('\n')
