@@ -2,17 +2,25 @@ package machine.command
 
 class DiskUsage implements Serializable {
     private final def steps
-    private String hostname
-    private String datetime
 
     DiskUsage(steps) {
         this.steps = steps
-        // this.hostname = getHostname()
     }
 
     String getHostname() {
+        return executeCommand('cat /etc/hostname')
+    }
+
+    String getDateTime() {
         return steps.sh(
-            script: 'cat /etc/hostname',
+            script: 'date +"%Y-%m-%dT%H:%M:%S"',
+            returnStdout: true
+        ).trim()
+    }
+
+    String executeCommand(String command) {
+        return steps.sh(
+            script: command,
             returnStdout: true
         ).trim()
     }
