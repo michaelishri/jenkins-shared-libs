@@ -1,9 +1,11 @@
-package machine.command
-
 import java.text.SimpleDateFormat
+import com.cloudbees.groovy.cps.NonCPS
 
-trait GetDateTime() {
-    def date = new Date()
-    def dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-    return dateTime.format(date)
+trait DateTime {
+    @NonCPS
+    String getDateTime() {
+        def date = new Date()
+        def dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+        return dateTime.format(date)
+    }
 }
