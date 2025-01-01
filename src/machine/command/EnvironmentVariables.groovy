@@ -1,9 +1,7 @@
 package machine.command
 
 import groovy.json.JsonOutput
-// import java.text.SimpleDateFormat
-// import DateTime
-// import traits.DateTimeTrait
+import java.text.SimpleDateFormat
 
 class EnvironmentVariables implements Serializable, LoggingTrait {
     private final def steps
