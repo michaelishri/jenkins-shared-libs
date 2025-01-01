@@ -3,7 +3,7 @@ package traits
 import java.text.SimpleDateFormat
 import com.cloudbees.groovy.cps.NonCPS
 
-trait DateTime implements Serializable {
+trait DateTime {
     @NonCPS
     String getDateTime() {
         def date = new Date()
