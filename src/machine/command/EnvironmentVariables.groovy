@@ -3,13 +3,13 @@ package machine.command
 import groovy.json.JsonOutput
 import java.text.SimpleDateFormat
 
-class LinuxDistro implements Serializable {
+class EnvironmentVariables implements Serializable {
     private final def steps
-    private String command = 'cat /etc/os-release'
-    private String classification = 'machine.command.linux-distro'
+    private String command = 'printenv | sort'
+    private String classification = 'machine.command.printenv'
     private String hostname
 
-    LinuxDistro(steps) {
+    EnvironmentVariables(steps) {
         this.steps = steps
     }
 
@@ -46,39 +46,30 @@ class LinuxDistro implements Serializable {
     private parse() {
         def raw = executeCommand(command).trim()
         
-        def osReleaseMap = [:]
+        def envs = [:]
         def lines = raw.split('\n')
 
         lines.each{ line ->
-            // Skip comments
-            if(line && !line.startsWith('#')) {
-                // Split on first equals sign
-                def parts = line.split('=', 2)
-                if (parts.size() == 2) {
-                    def key = parts[0].trim()
-                    def value = parts[1].trim()
-                    
-                    // Remove surrounding quotes if present
-                    if ((value.startsWith('"') && value.endsWith('"')) ||
-                        (value.startsWith("'") && value.endsWith("'"))) {
-                        value = value[1..-2]
-                    }
-                    
-                    // Convert common boolean strings
-                    if (value.toLowerCase() in ['true', 'false']) {
-                        value = value.toBoolean()
-                    }
-                    // Try to convert to number if possible
-                    else if (value.isNumber()) {
-                        value = value.toBigDecimal()
-                    }
-                    
-                    osReleaseMap[key] = value
+            // Split on first equals sign
+            def parts = line.split('=', 2)
+            if (parts.size() == 2) {
+                def key = parts[0].trim()
+                def value = parts[1].trim()
+                
+                // Convert common boolean strings
+                if (value.toLowerCase() in ['true', 'false']) {
+                    value = value.toBoolean()
                 }
+                // Try to convert to number if possible
+                else if (value.isNumber()) {
+                    value = value.toBigDecimal()
+                }
+                
+                envs[key] = value
             }
         }
 
-        return osReleaseMap
+        return envs
     }
 
     private String executeCommand(String command) {
