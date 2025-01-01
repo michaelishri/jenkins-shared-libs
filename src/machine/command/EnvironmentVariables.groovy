@@ -3,7 +3,7 @@ package machine.command
 import groovy.json.JsonOutput
 import java.text.SimpleDateFormat
 
-class EnvironmentVariables implements Serializable, LoggingTrait {
+class EnvironmentVariables implements Serializable {
     private final def steps
     private String command = 'printenv | sort'
     private String classification = 'machine.command.printenv'
