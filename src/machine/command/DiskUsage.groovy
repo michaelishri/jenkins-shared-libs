@@ -26,6 +26,8 @@ class DiskUsage implements Serializable {
             def values = line.split(/\s+/)
             [headers, values].transpose().collectEntries() // Map headers to values
         }
+
+        return result
     }
 
 
