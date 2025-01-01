@@ -7,18 +7,13 @@ class DiskUsage implements Serializable {
     private final def steps
     private String command = 'df -a'
     private String classification = 'machine.command.df'
-    private String hostname
 
     DiskUsage(steps) {
         this.steps = steps
     }
 
     String getHostname() {
-        if(hostname == null) {
-            hostname = java.net.InetAddress.getLocalHost().getHostName()
-        }
-
-        return hostname
+        return java.net.InetAddress.getLocalHost().getHostName()
     }
 
     String getDateTime() {
