@@ -1,4 +1,4 @@
-package cc.mishri
+package org.example
 
 @groovy.transform.Field
 class CommandParser implements Serializable {
