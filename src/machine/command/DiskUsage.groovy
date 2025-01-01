@@ -7,7 +7,7 @@ class DiskUsage implements Serializable {
 
     DiskUsage(steps) {
         this.steps = steps
-        this.hostname = getHostname()
+        // this.hostname = getHostname()
     }
 
     String getHostname() {
