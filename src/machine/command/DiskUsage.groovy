@@ -5,7 +5,6 @@ import groovy.json.JsonOutput
 class DiskUsage implements Serializable {
     private final def steps
     private command = 'df -a'
-    private ArrayList data
 
     DiskUsage(steps) {
         this.steps = steps
@@ -23,7 +22,7 @@ class DiskUsage implements Serializable {
         return parse()
     }
 
-    def parse() {
+    def String parse() {
         def raw = executeCommand(command)
         def lines = raw.split('\n')
         def headers = lines[0].split(/\s+/) // Extract the headers from the first line
@@ -34,7 +33,6 @@ class DiskUsage implements Serializable {
             [headers, values].transpose().collectEntries() // Map headers to values
         }
 
-        // this.data = result
         return JsonOutput.prettyPrint(JsonOutput.toJson(result))
     }
 
