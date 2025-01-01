@@ -47,7 +47,7 @@ class DiskUsage implements Serializable {
         return result
     }
 
-    def toJson(ArrayList data) {
+    def toJson(data) {
         return JsonOutput.prettyPrint(JsonOutput.toJson(data))
     }
 
