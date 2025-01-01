@@ -1,5 +1,6 @@
 package machine.command
 
+import com.cloudbees.groovy.cps.NonCPS
 import groovy.json.JsonOutput
 
 class DiskUsage implements Serializable {
@@ -23,6 +24,7 @@ class DiskUsage implements Serializable {
         return parse().toJson()
     }
 
+    @NonCPS
     def parse() {
         def raw = executeCommand(command)
         def lines = raw.split('\n')
@@ -34,7 +36,7 @@ class DiskUsage implements Serializable {
             [headers, values].transpose().collectEntries() // Map headers to values
         }
 
-        this.data = result
+        // this.data = result
         return JsonOutput.toJson(result)
     }
 
