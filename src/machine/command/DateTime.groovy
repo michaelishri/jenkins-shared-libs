@@ -2,7 +2,7 @@ package machine.command
 
 import java.text.SimpleDateFormat
 
-trait getDateTime() {
+trait GetDateTime() {
     def date = new Date()
     def dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     return dateTime.format(date)
