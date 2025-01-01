@@ -1,9 +1,10 @@
 package machine.command
 
 import groovy.json.JsonOutput
-import java.text.SimpleDateFormat
+// import java.text.SimpleDateFormat
+import machine.command.DateTime
 
-class EnvironmentVariables implements Serializable {
+class EnvironmentVariables implements Serializable, GetDateTime {
     private final def steps
     private String command = 'printenv | sort'
     private String classification = 'machine.command.printenv'
@@ -25,11 +26,11 @@ class EnvironmentVariables implements Serializable {
         hostname = computername
     }
 
-    String getDateTime() {
-        def date = new Date()
-        def dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        return dateTime.format(date)
-    }
+    // String getDateTime() {
+    //     def date = new Date()
+    //     def dateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    //     return dateTime.format(date)
+    // }
 
     LinkedHashMap get() {
         return [
@@ -37,7 +38,7 @@ class EnvironmentVariables implements Serializable {
             execution: [
                 command: this.command,
                 hostname: this.getHostname(),
-                time: this.getDateTime()
+                time: GetDateTime()
             ],
             data: parse()
         ]
