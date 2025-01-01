@@ -6,6 +6,7 @@ class DiskUsage implements Serializable {
     private final def steps
     private command = 'df -a'
     private classification = 'machine.command.df'
+    private ingest
 
     DiskUsage(steps) {
         this.steps = steps
@@ -30,9 +31,8 @@ class DiskUsage implements Serializable {
             data: parse()
         ]
 
+        this.ingest = ingest
         return ingest
-
-        // return toJson(ingest)
     }
 
     def String parse() {
