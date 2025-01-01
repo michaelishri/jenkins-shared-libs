@@ -1,5 +1,6 @@
 package traits
 
+import java.text.SimpleDateFormat
 
 trait DateTime implements Serializable {
     String getDateTime() {
