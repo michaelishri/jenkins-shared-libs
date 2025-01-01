@@ -18,7 +18,14 @@ class DiskUsage implements Serializable {
 
     public parse() {
         def raw = executeCommand(command)
-        return raw
+        def lines = raw.split('\n')
+        def headers = lines[0].split(/\s+/) // Extract the headers from the first line
+        def dataLines = lines[1..-1] // Extract the rest of the lines (the data)
+        
+        def result = dataLines.collect { line ->
+            def values = line.split(/\s+/)
+            [headers, values].transpose().collectEntries() // Map headers to values
+        }
     }
 
 
