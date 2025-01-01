@@ -13,7 +13,8 @@ class DiskUsage implements Serializable {
     }
 
     String getHostname() {
-        return executeCommand('cat /etc/hostname')
+        // return executeCommand('cat /etc/hostname')
+        return this.steps.env('HOSTNAME')
     }
 
     String getDateTime() {
