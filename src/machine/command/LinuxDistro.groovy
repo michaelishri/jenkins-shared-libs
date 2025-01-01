@@ -21,7 +21,7 @@ class LinuxDistro implements Serializable {
         return hostname
     }
 
-    public setHostname(String computername) {
+    static setHostname(String computername) {
         hostname = computername
     }
 
