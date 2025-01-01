@@ -17,7 +17,7 @@ class DiskUsage implements Serializable {
     }
 
     String command() {
-        return executeCommand('df -a')
+        return executeCommand(command)
     }
 
     public parse() {
