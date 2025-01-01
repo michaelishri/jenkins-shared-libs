@@ -1,6 +1,7 @@
 package machine.command
 
 import groovy.json.JsonOutput
+import java.text.SimpleDateFormat
 
 class DiskUsage implements Serializable {
     private final def steps
@@ -16,7 +17,9 @@ class DiskUsage implements Serializable {
     }
 
     String getDateTime() {
-        return executeCommand('date +"%Y-%m-%dT%H:%M:%S"')
+        def date = new Date()
+        def dateTime = new SimpleDateFormat("yyyy-MM-ddTHH:mm:ss")
+        return dateTime.format(date)
     }
 
     LinkedHashMap get() {
