@@ -33,7 +33,7 @@ class DiskUsage implements Serializable {
         return ingest
     }
 
-    def String parse() {
+    private String parse() {
         def raw = executeCommand(command)
         def lines = raw.split('\n')
         def headers = lines[0].split(/\s+/) // Extract the headers from the first line
@@ -51,7 +51,7 @@ class DiskUsage implements Serializable {
         if(pretty) {
             return JsonOutput.prettyPrint(JsonOutput.toJson(get()))    
         }
-        
+
         return JsonOutput.toJson(get())
     }
 
