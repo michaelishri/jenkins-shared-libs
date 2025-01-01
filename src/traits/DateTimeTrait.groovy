@@ -1,6 +1,6 @@
 package traits
 
-trait DateTimeTrait implements Serializable {
+trait DateTimeTrait {
     String getDateTime() {
         return "hello"
     }
